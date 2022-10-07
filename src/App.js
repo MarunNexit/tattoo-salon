@@ -3,23 +3,27 @@ import Menu from "./components/menu/Menu";
 import Home from "./components/pages/Home";
 import Portfolio from "./components/pages/Portfolio";
 import About from "./components/pages/About";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider} from "react-router-dom";
 
 function App() {
+    const router = createBrowserRouter([
+        {path: "/", element: <Home/> },
+        {path: "/portfolio", element: <Portfolio/>},
+        {path: "/about", element: <About/>}
+    ]);
+
+
   return (
-      <BrowserRouter>
-      <section className="app">
-          <header className="app-header">
-                  <Menu/>
-                  <Routes>
-                      <Route exact path="/" element={<Home/> } />
-                      <Route path="/portfolio" element={<Portfolio/>} />
-                      <Route path="/about" element={<About/>} />
-                  </Routes>
-          </header>
+          <div className="app">
+              <header className="app-header">
+                  <Menu />
+              </header>
+
+              <RouterProvider router={router} />;
               <h1>hello!</h1>
-      </section>
-      </BrowserRouter>
+
+              <footer><h1>hello!</h1></footer>
+          </div>
   );
 }
 
