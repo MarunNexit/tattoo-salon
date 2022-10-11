@@ -1,24 +1,26 @@
+
 .app {
   text-align: center;
 }
 
 .app-header {
   font-size: large;
+
 }
 
 .newlink {
   color: grey;
   text-decoration: inherit;
 }
-
+.container
+{
+  font-family: Alegreya;
+  font-size: larger;
+}
 .newlink:hover {
   color: white;
 }
-.navbar-brand{
-  font-size: 40px !important;
-  color: white;
-  text-decoration: inherit;
-}
+
 .navbar-brand.hover{
   color: white;
 }
