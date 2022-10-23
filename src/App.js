@@ -3,7 +3,7 @@ import Menu from "./components/menu/Menu";
 import Home from "./components/pages/Home";
 import Portfolio from "./components/pages/Portfolio";
 import About from "./components/pages/About";
-import {BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 function App() {
     const router = createBrowserRouter([
