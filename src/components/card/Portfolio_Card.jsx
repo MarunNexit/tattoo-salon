@@ -7,12 +7,11 @@ const Portfolio_Card = (props) => {
     const addItem = () => {
         console.log(props.card);
     }
-
     return (
-        <div >
+        <div>
             <Card>
                 <ImageViewer>
-                    <Card.Img variant="top" src={props.card.imgurl} onClick={addItem} />
+                    <Card.Img className={"CItem"} variant="top" src={props.card.imgurl} onClick={addItem} />
                 </ImageViewer>
             </Card>
         </div>

@@ -1,4 +1,6 @@
 
+* { font-family: Alegreya; }
+
 .app {
   text-align: center;
 }
@@ -65,18 +67,42 @@
 }
 
 
-.fullscreen:-webkit-full-screen {
-  width: auto !important;
-  height: auto !important;
-  margin:auto !important;
+.banner-bg
+{
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 88vh;
+  position: relative;
+  object-fit: cover;
 }
-.fullscreen:-moz-full-screen {
-  width: auto !important;
-  height: auto !important;
-  margin:auto !important;
+
+.CItem {
+  width: 100%;
+  height: 25vw;
+  object-fit: cover;
 }
-.fullscreen:-ms-fullscreen {
-  width: auto !important;
-  height: auto !important;
-  margin:auto !important;
+
+.banner_footer {
+  background-color: #000000 !important;
+  color: white !important;
+  opacity: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: start;
+}
+
+.tools{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+.block{
+  width:200px;
+  height: 100px;
+  background: #000;
+  color:white;
 }
