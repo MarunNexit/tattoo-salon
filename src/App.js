@@ -1,8 +1,9 @@
 import './App.css';
 import Menu from "./components/menu/Menu";
-import Home from "./components/pages/Home";
-import Portfolio from "./components/pages/Portfolio";
-import About from "./components/pages/About";
+import Home from "./components/pages/home/Home";
+import Portfolio from "./components/pages/portfolio/Portfolio";
+import About from "./components/pages/about/About";
+import Appointment from "./components/pages/appointment/Appointments";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
@@ -10,9 +11,9 @@ function App() {
     const routes = [
         { path: "/", element: <Home/> },
         { path: "/portfolio", element: <Portfolio/> },
-        { path: "/about", element: <About/> }
+        { path: "/about", element: <About/> },
+        { path: "/appointment", element: <Appointment/> }
     ];
-
 
   return (
       <BrowserRouter>
@@ -25,8 +26,9 @@ function App() {
                       <Route key={index} path={item.path} element={item.element} />) }
               </Routes>
               <h1>hello!</h1>
-
-              <footer><h1>hello!</h1></footer>
+              <footer className="app-footer">
+                  <h1>hello!</h1>
+              </footer>
           </div>
       </BrowserRouter>
   );

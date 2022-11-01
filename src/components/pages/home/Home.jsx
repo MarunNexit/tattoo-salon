@@ -1,8 +1,8 @@
 import React from 'react';
-import S_Card from "../card/S_Card";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import S_Card from "../../card/S_Card";
+import {Row, Col} from 'react-bootstrap';
 import {Button} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 let titles = ['Портфоліо', 'Kurisu', 'Контакти'];
 let scrs = ['/portfolio', '/about', '/about'];
@@ -11,7 +11,6 @@ let desc = ['Багата різноманітність різних тату-�
 const Cards = () => {
     return (
         <div>
-            <br /><br /><br /><br />
             <div className="banner-bg" style={{
                     backgroundImage: `url(${"img/home_backgr_1.jpg"})`,
                     hight: 'auto',
@@ -25,7 +24,7 @@ const Cards = () => {
                                 1
                             </div>
                             <div className="block">
-                                <Button variant="outline-light" size="lg" href={"/portfolio"}>Дізнатися більше</Button>
+                                <Button className="d-grid gap-2" variant="outline-light" size={"lg"} as={ Link } to={"/appointment"}>Записатися на сеанс</Button>
                             </div>
                             <div className="block">
                                 3

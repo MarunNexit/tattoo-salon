@@ -10,6 +10,11 @@
 
 }
 
+.app-footer {
+  font-size: large;
+
+}
+
 .newlink {
   color: grey;
   text-decoration: inherit;
@@ -105,4 +110,9 @@
   height: 100px;
   background: #000;
   color:white;
+}
+.formAppointment
+{
+
+  align-items: center;
 }
