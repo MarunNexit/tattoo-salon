@@ -1,21 +1,41 @@
 import './App.css';
 import Menu from "./components/menu/Menu";
 import Home from "./components/pages/home/Home";
-import Portfolio from "./components/pages/portfolio/Portfolio";
+import Gallery from "./components/pages/gallery/Gallery";
 import About from "./components/pages/about/About";
+import Contact from "./components/pages/contact/Contact";
 import Appointment from "./components/pages/appointment/Appointments";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import AddGallery from "./components/pages/forAdmin/AddGallery";
+import AddPortfResult from "./components/pages/forAdmin/AddPortfResult";
+import Footer from "./components/footer/Footer";
+import LoginAdmin from "./components/pages/forAdmin/loginAdmin/LoginAdmin";
+import React, {useState} from "react";
+import {UserContext} from "./components/context/UserContext";
+import TopPages from "./components/topPages/TopPages";
 
 function App() {
 
+    const [user, setUser] = useState({
+        email: "",
+        name: "",
+        pass: "",
+        auth: null,
+    });
+
     const routes = [
         { path: "/", element: <Home/> },
-        { path: "/portfolio", element: <Portfolio/> },
+        { path: "/gallery", element: <Gallery/> },
         { path: "/about", element: <About/> },
-        { path: "/appointment", element: <Appointment/> }
+        { path: "/contact", element: <Contact/> },
+        { path: "/appointment", element: <Appointment/> },
+        { path: "/addportf", element: <AddGallery/> },
+        { path: "/loginadm", element: <LoginAdmin/> },
+        { path: "/addresult", element: <AddPortfResult/> }
     ];
 
   return (
+      <UserContext.Provider value={{user, setUser}}>
       <BrowserRouter>
           <div className="app">
               <header className="app-header">
@@ -23,14 +43,16 @@ function App() {
               </header>
               <Routes>
                   { routes.map((item, index) =>
-                      <Route key={index} path={item.path} element={item.element} />) }
+                      <Route key={index} path={item.path} element={item.element} /> )
+                  }
               </Routes>
-              <h1>hello!</h1>
               <footer className="app-footer">
-                  <h1>hello!</h1>
+                  <br />
+                  <Footer />
               </footer>
           </div>
       </BrowserRouter>
+      </UserContext.Provider>
   );
 }
 

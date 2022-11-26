@@ -46,6 +46,7 @@
   }
 }
 
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -82,6 +83,16 @@
   object-fit: cover;
 }
 
+.footer-bg
+{
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  position: relative;
+  object-fit: cover;
+}
+
 .CItem {
   width: 100%;
   height: 25vw;
@@ -89,9 +100,8 @@
 }
 
 .banner_footer {
-  background-color: #000000 !important;
   color: white !important;
-  opacity: 80%;
+  background-color: rgba(0, 0, 0, 0.8) !important;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -105,14 +115,78 @@
   flex-direction:row;
   justify-content: space-between;
 }
+
 .block{
-  width:200px;
+  background-color: rgba(0, 0, 0, 0) !important;
+  width:400px;
   height: 100px;
   background: #000;
   color:white;
+  align-items: center                    /* 3 */
+   /* 4 */
 }
+
+.container-block {
+  height: 400px;
+  position: relative;
+}
+
+.newblock{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+}
+
 .formAppointment
 {
-
   align-items: center;
+}
+
+.roomfac {
+  display: flex;
+  width: 100%;
+  max-width: 60%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.gallerylink {
+  color: #1a1e21 !important;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.galleryopacity {
+  opacity: 50%;
+}
+
+
+.topBanner
+{
+  position: relative;
+  object-fit: cover;
+}
+
+.topBannerBot {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  font-size: 80px;
+  text-align: start;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #ffffff;
+}
+
+
+.outline {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #AFFC41;
 }
