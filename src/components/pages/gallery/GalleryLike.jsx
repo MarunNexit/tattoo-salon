@@ -48,6 +48,7 @@ const GalleryLike = () => {
                 </Row>
             </div>
 
+
             <>
                 <Button variant="primary" onClick={handleShow}>
                     Список вподобаних тату
