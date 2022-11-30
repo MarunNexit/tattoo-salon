@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import GoogleMap from "../../googleMap/GoogleMap"
 import {Col, Row, Image} from "react-bootstrap";
 import TopPages from "../../topPages/TopPages";
+import FormContact from "../../form/FormContact";
 
 const Contact = () => {
 
@@ -11,16 +12,16 @@ const Contact = () => {
 
 
     return (
-        <div>
+        <div className="container-fluid">
             <TopPages text={"Контакти"} />
             <br/>
             <br/>
             <Row>
-                <Col className={"container-block"} >
-                    <Image src={"../../img/portf_1.jpg"} style={{height: 400}}/>
+                <Col md={{ span: 5, offset: 1 }}>
+                    <Image src={"../../img/tattoo0.png"} style={{height: 350}}/>
                 </Col>
-                <Col style={{height: 400, weight: "100%"}} className={"container-block"}>
-                    <div style={{fontSize: 20}} className={"newblock"}>
+                <Col md={{ span: 4 }}  className="col my-auto">
+                    <div style={{fontSize: 20}} >
                         <h2>Контактні дані</h2>
                         <div>
                             Україна, Івано-Франківськ, вул. Федьковича
@@ -34,9 +35,9 @@ const Contact = () => {
                     </div>
                 </Col>
             </Row>
-            <Row xs={2}>
-                <Col className={"container-block"} style={{height: 400, weight: "100%"}}>
-                    <div style={{fontSize: 20, marginLeft: "auto", marginRight: "auto", width: "40em"}} className={"newblock"}>
+            <Row>
+                <Col md={{ span: 5, offset: 1 }}  className="col my-auto" >
+                    <div style={{fontSize: 20}}>
                         <h2>Адреса</h2>
                         <div>
                             Україна, Івано-Франківськ, вул. Федьковича
@@ -49,13 +50,18 @@ const Contact = () => {
                         </div>
                     </div>
                 </Col>
-                <Col className={"container-block"} style={{height: 400, weight: "100%"}}>
-                    <div className={"newblock"}>
-                        <Image  src={"../../img/portf_1.jpg"} style={{height: 400}}/>
-                    </div>
+                <Col md={{ span: 4}} className="col my-auto"  >
+                        <Image  src={"../../img/tattoo1.png"} style={{height: 350}}/>
                 </Col>
             </Row>
-            <GoogleMap url={""} />
+            <br/><br/>
+            <TopPages />
+            <br/><br/>
+            <GoogleMap />
+            <br/><br/>
+            <TopPages />
+            <br/><br/>
+            <FormContact state={false}/>
         </div>
     );
 };

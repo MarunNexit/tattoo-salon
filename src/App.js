@@ -7,12 +7,17 @@ import Contact from "./components/pages/contact/Contact";
 import Appointment from "./components/pages/appointment/Appointments";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AddGallery from "./components/pages/forAdmin/AddGallery";
-import AddPortfResult from "./components/pages/forAdmin/AddPortfResult";
+import EditGallery from "./components/pages/forAdmin/EditGallery";
 import Footer from "./components/footer/Footer";
 import LoginAdmin from "./components/pages/forAdmin/loginAdmin/LoginAdmin";
 import React, {useState} from "react";
 import {UserContext} from "./components/context/UserContext";
 import TopPages from "./components/topPages/TopPages";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import {firebaseService} from "./FirebaseService";
+
+
 
 function App() {
 
@@ -31,7 +36,7 @@ function App() {
         { path: "/appointment", element: <Appointment/> },
         { path: "/addportf", element: <AddGallery/> },
         { path: "/loginadm", element: <LoginAdmin/> },
-        { path: "/addresult", element: <AddPortfResult/> }
+        { path: "/editgallery", element: <EditGallery/> }
     ];
 
   return (

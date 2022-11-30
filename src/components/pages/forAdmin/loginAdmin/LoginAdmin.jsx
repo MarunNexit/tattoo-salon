@@ -3,23 +3,19 @@ import { Button, Form } from "react-bootstrap";
 import { firebaseService } from "../../../../FirebaseService";
 import Message from "../../../message/Message"
 import {UserContext} from "../../../context/UserContext";
+import Home from "../../home/Home";
+import {Route, Routes} from "react-router-dom";
 
 const LoginAdmin = () => {
     const { user, setUser } = useContext(UserContext);
+    console.log("user", user);
     const [emailInput, setEmailInput] = useState("");
     const [passInput, setPassInput] = useState("");
-    const [groupInput, setGroupInput] = useState("");
-    const [nameInput, setNameInput] = useState("");
-    const [surnameInput, setSurnameInput] = useState("");
-    const [groupInputOptions, setGroupInputOptions] = useState([]);
 
     const [isSignup, setIsSignup] = useState(false);
 
     const [emailError, setEmailError] = useState("");
     const [emailSuccess, setEmailSuccess] = useState("");
-    const [groupError, setGroupError] = useState("");
-    const [nameError, setNameError] = useState("");
-    const [surnameError, setSurnameError] = useState("");
     const [passError, setPassError] = useState("");
 
     const [isSend, setIsSend] = useState(false);
@@ -31,21 +27,24 @@ const LoginAdmin = () => {
         window.scrollTo(0, 0)
     }, [])
 
-/*
-    useEffect(() => {
-        setGroupInputOptions([...user.groups]);
-    }, [user.groups]);
-*/
-
+    const Hello = () => (
+        <Routes>
+        <Route render={({ history}) => (
+            <button
+                type='button'
+                onClick={() => { history.push('/new-location') }}
+            >
+                Click Me!
+            </button>
+        )} />
+        </Routes>
+    )
 
     const login = (e) => {
         e.preventDefault();
         let isError = false;
         setEmailSuccess("");
         setEmailError("");
-        setGroupError("");
-        setNameError("");
-        setSurnameError("");
         setPassError("");
         setIsSend(true);
         if (isSignup) {
@@ -53,18 +52,6 @@ const LoginAdmin = () => {
                 // setIsMessage(true);
                 // setMessage({type: "danger", heading:"Помилка", text: "Невірний тип електронної пошти, використайте пошту університету"});
                 setEmailError("Введіть email університету '@nung.edu.ua'");
-                isError = true;
-            }
-            if (groupInput.length === 0) {
-                setGroupError("Введіть Вашу групу");
-                isError = true;
-            }
-            if (nameInput.length < 2) {
-                setNameError("Введіть Ім'я");
-                isError = true;
-            }
-            if (surnameInput.length < 2) {
-                setSurnameError("Введіть прізвище");
                 isError = true;
             }
             if (passInput.length < 5) {
@@ -75,19 +62,12 @@ const LoginAdmin = () => {
                 return;
             }
             console.log("asdasd");
-            firebaseService.signup(emailInput, passInput, nameInput, surnameInput, groupInputOptions)
-                .then(userAuth => {
-                    setUser({...user, email: emailInput, name: nameInput,
-                        auth: userAuth});
-                }).catch(err => {
-                console.log(err);
-            });
+
         } else {
             console.log("asdasd");
             firebaseService.login(emailInput, passInput)
                 .then(userAuth => {
-                    setUser({...user, email: emailInput, name: nameInput,
-                        auth: userAuth});
+                    setUser({...user, email: emailInput, auth: userAuth });
                     firebaseService.saveUser(emailInput, userAuth.user.uid);
                 }).catch(err => {
                 console.log(err);
@@ -157,37 +137,6 @@ const LoginAdmin = () => {
                         <Form.Control.Feedback>{emailSuccess}</Form.Control.Feedback>
                     </Form.Group>
 
-
-                    {isSignup ?
-                        <Form.Group className="mb-4 col-12" controlId="formName">
-                            <Form.Label className="float-start">Ім'я</Form.Label>
-                            <Form.Control type="text" placeholder="Ім'я"
-                                          value={nameInput}
-                                          onChange={e => setNameInput(e.target.value)}
-                                          isValid={isSend && nameError.length === 0}
-                                          isInvalid={isSend && nameError.length > 0}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {nameError}
-                            </Form.Control.Feedback>
-                        </Form.Group> : ""
-                    }
-
-                    {isSignup ?
-                        <Form.Group className="mb-4 col-12" controlId="formSurname">
-                            <Form.Label className="float-start">Прізвище</Form.Label>
-                            <Form.Control type="text" placeholder="Прізвище"
-                                          value={surnameInput}
-                                          onChange={e => setSurnameInput(e.target.value)}
-                                          isValid={isSend && surnameError.length === 0}
-                                          isInvalid={isSend && surnameError.length > 0}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {surnameError}
-                            </Form.Control.Feedback>
-                        </Form.Group> : ""
-                    }
-
                     <Form.Group className="mb-2 col-12" controlId="formLoginPassword">
                         <Form.Label className="float-start">Пароль</Form.Label>
                         <Form.Control type="password" placeholder="Пароль"
@@ -206,13 +155,13 @@ const LoginAdmin = () => {
                             Забули пароль?
                         </Button>
                     </div>
-                    <div className="col-6">
-                        <Button variant="link" type="button" onClick={e => setSignup(e)}>
-                            {isSignup ? "Вже зареєстрований" : "Зареєструватись..."}
-                        </Button>
-                    </div>
-                    <div className="col-6">
-                        <Button variant="link" type="button" onClick={e => loginWithGoogle(e)}>
+                            <div className="col-6">
+                                <Button variant="link" type="button" onClick={e => setSignup(e)}>
+                                    {isSignup ? "Вже зареєстрований" : "Зареєструватись..."}
+                                </Button>
+                            </div>
+                            <div className="col-6">
+                                <Button variant="link" type="button" onClick={e => loginWithGoogle(e)}>
                             Логін з Google
                         </Button>
                     </div>

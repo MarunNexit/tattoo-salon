@@ -1,15 +1,16 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, doc } from "firebase/firestore/lite";
-import { getAnalytics } from "firebase/analytics";
+import {getFirestore, collection, getDocs, setDoc, addDoc, doc, query, where, orderBy, limit, deleteDoc} from "firebase/firestore/lite";
 import { getAuth, browserLocalPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
     signOut, sendPasswordResetEmail, createUserWithEmailAndPassword  } from "firebase/auth";
 import { firebaseConfig } from "./environment";
+import React from "react";
+
+
 
 
 class FirebaseService {
     constructor() {
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        this.app = initializeApp(firebaseConfig);
         this.db = getFirestore(this.app);
         this.auth = getAuth(this.app, {
             persistence: browserLocalPersistence,
@@ -21,6 +22,81 @@ class FirebaseService {
         const coursesSnapshot = await getDocs(coursesCol);
         return coursesSnapshot.docs.map(doc => doc.data());
     }
+
+    async getTattoo() {
+        const querySnapshot = await getDocs(collection(this.db, "tattoo"));
+        const items = []
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data()}`);
+            items.push(doc.data())
+        });
+        return items
+    }
+
+    async getTattoo2() {
+        const coursesCol = collection(this.db, "tattoo");
+        const coursesSnapshot = await getDocs(coursesCol);
+        return coursesSnapshot.docs.map(doc => doc.data());
+    }
+
+    async saveTattoo(tattoo) {
+        console.log(tattoo)
+        const tattooRef = await addDoc(collection(this.db, "tattoo"), {tattoo});
+    }
+
+    async getTempValue(path, label, value) {
+        const q = query(collection(this.db, path), where(label, "==", value));
+        console.log(q);
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+        });
+        return querySnapshot.docs.map(doc => doc.data());
+    }
+
+    async getTemp(path) {
+        const q = query(collection(this.db, path));
+        console.log(q);
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+        });
+        return querySnapshot.docs.map(doc => doc.data());
+    }
+
+    async deleteDocument(path, id) {
+        console.log("delete");
+
+        firebaseService.getTempValue(path, "id", id).then(async (doc) => {
+            console.log("start delete");
+            console.log(doc);
+            const querySnapshot = await getDocs();
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    async deleteDocument2(path, id) {
+        console.log("delete");
+
+        firebaseService.getTempValue(path, "id", id).then(async (doc) => {
+            console.log("start delete");
+            console.log(doc);
+            await deleteDoc(doc(this.db, path, doc));
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
 
     async getGroups() {
         const coursesCol = collection(this.db, "academic-groups");

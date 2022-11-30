@@ -117,12 +117,14 @@
 }
 
 .block{
+  display: flex;
   background-color: rgba(0, 0, 0, 0) !important;
   width:400px;
   height: 100px;
-  background: #000;
   color:white;
-  align-items: center                    /* 3 */
+  align-items: center;
+  border: solid green 1px;
+  /* 3 */
    /* 4 */
 }
 
@@ -168,11 +170,16 @@
 
 .topBanner
 {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
   position: relative;
   object-fit: cover;
 }
 
 .topBannerBot {
+  font-family: "Permanent Marker";
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -181,12 +188,13 @@
   font-size: 80px;
   text-align: start;
   font-weight: bold;
+  color: darkred;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #ffffff;
+  -webkit-text-stroke-color: white;
 }
 
 
 .outline {
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #AFFC41;
+  -webkit-text-stroke-color: red;
 }

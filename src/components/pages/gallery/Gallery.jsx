@@ -7,7 +7,9 @@ import Nav from 'react-bootstrap/Nav';
 import {Image} from "react-bootstrap";
 import TopPages from "../../topPages/TopPages";
 import GalleryLike from "./GalleryLike";
+import Button from "react-bootstrap/Button";
 
+import { getStorage } from "firebase/storage";
 
 const Gallery = () => {
 
@@ -16,6 +18,8 @@ const Gallery = () => {
     }, [])
 
     const [authorId, setAuthorId] = useState(0);
+    const [totalItems, setTotalItems] = useState([]);
+    const [selectAuthor, setSelectAuthor] = useState(false);
 
     const itemList = [
         {id: 1,imgurl: "img/portf_1.jpg",authorId: 1},
@@ -26,7 +30,6 @@ const Gallery = () => {
         {id: 6,imgurl: "img/portf_3.jpg",authorId: 3}
     ];
 
-    const [totalItems, setTotalItems] = useState([]);
 
     const getLocalStore = () => {
         if (totalItems && totalItems.length > 0) {
@@ -39,11 +42,18 @@ const Gallery = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect(()=>{
         getLocalStore();
-    });
+        console.log(totalItems);
+    },[]);
 
-    const totalPriceClick = (item) => {
+    useEffect(()=>{
+        if(totalItems.length > 0)
+            window.localStorage.setItem(LOCALSTORE_TOTALITEMS, JSON.stringify(totalItems));
+    }, [totalItems]);
+
+
+    const AddNew = (item) => {
         let num = 0;
         console.log(item);
         totalItems.forEach((itemF, indexF) => {
@@ -77,23 +87,35 @@ const Gallery = () => {
     };
 
     return (
-        <div >
+        <div className="container-fluid">
             <TopPages text={"Галерея"} />
             <br />
-            <Nav className="justify-content-center"  defaultActiveKey="/home" style={{ display: "flex"}}>
-                <Nav.Item className={authorId === 0 ? '' : 'galleryopacity'}>
-                    <Nav.Link className={'gallerylink'} onClick={() => SelectAuthor(0)}><Image style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20}} src="img/portf_1.jpg"></Image></Nav.Link>
+            <Nav className="justify-content-center" defaultActiveKey="/gallery" as="ul">
+                <Nav.Item as="li">
+                    <Button variant="primary" variant="danger" onClick={() => setSelectAuthor(!selectAuthor)}>
+                        Майстри
+                    </Button>
                 </Nav.Item>
-                <Nav.Item className={authorId === 1 ? '' : 'galleryopacity'}>
-                    <Nav.Link className={'gallerylink'} onClick={() => SelectAuthor(1)}><Image style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20}} src="img/portf_1.jpg"></Image> Cофія Богданова </Nav.Link>
-                </Nav.Item>
-                <Nav.Item className={authorId === 2 ? '' : 'galleryopacity'}>
-                    <Nav.Link className={"gallerylink"} onClick={() => setAuthorId(2)}><Image style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20 }} src="img/portf_2.jpg"></Image> Арсен Коваль</Nav.Link>
-                </Nav.Item>
-                <Nav.Item className={authorId === 3 ? '' : 'galleryopacity'}>
-                    <Nav.Link className={"gallerylink"} onClick={() => setAuthorId(3)}><Image style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20 }} src="img/portf_3.jpg"></Image> Денис Овчаренко</Nav.Link>
+                <Nav.Item as="li">
+                    <GalleryLike/>
                 </Nav.Item>
             </Nav>
+            {selectAuthor ?
+                <Nav className="justify-content-center"  defaultActiveKey="/gallery" style={{ display: "flex"}}>
+                    <Nav.Item className={authorId === 0 ? '' : 'galleryopacity'}>
+                        <Nav.Link className={'gallerylink'} onClick={() => setAuthorId(0)}><Image roundedCircle={true} style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20}} src="img/portf_1.jpg"></Image></Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className={authorId === 1 ? '' : 'galleryopacity'}>
+                        <Nav.Link className={'gallerylink'} onClick={() => setAuthorId(1)}><Image roundedCircle={true} style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20}} src="img/portf_1.jpg"></Image> Cофія Богданова </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className={authorId === 2 ? '' : 'galleryopacity'}>
+                        <Nav.Link className={"gallerylink"} onClick={() => setAuthorId(2)}><Image roundedCircle={true} style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20 }} src="img/portf_2.jpg"></Image> Арсен Коваль</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className={authorId === 3 ? '' : 'galleryopacity'}>
+                        <Nav.Link className={"gallerylink"} onClick={() => setAuthorId(3)}><Image roundedCircle={true} style={{ display: "block", width: 180, padding: 15, marginRight: 20, marginLeft: 20 }} src="img/portf_3.jpg"></Image> Денис Овчаренко</Nav.Link>
+                    </Nav.Item>
+                </Nav> : null
+            }
         <div className="container" >
             <Row xs={1} md={3}  className="g-5 m-5">
                 {itemList.map((item, index) => {
@@ -101,7 +123,7 @@ const Gallery = () => {
                         return(
                             <Col key={index}>
                                 {/* eslint-disable-next-line react/jsx-pascal-case */}
-                                <Gallery_Card card={item} getItem={totalPriceClick}
+                                <Gallery_Card card={item} getItem={AddNew} edit={false}
                                               removeItem={removeItem} />
                             </Col>
                         )
@@ -110,7 +132,7 @@ const Gallery = () => {
                         return (
                             <Col key={index}>
                                 {/* eslint-disable-next-line react/jsx-pascal-case */}
-                                <Gallery_Card card={item} getItem={totalPriceClick}
+                                <Gallery_Card card={item} getItem={AddNew} edit={false}
                                               removeItem={removeItem}/>
                             </Col>
                         )
@@ -118,7 +140,6 @@ const Gallery = () => {
                     return null;
                 })}
             </Row>
-            <GalleryLike/>
         </div>
         </div>
     );

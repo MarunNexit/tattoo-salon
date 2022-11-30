@@ -7,7 +7,6 @@ import {
     FooterLink,
     Heading,
 } from "./FooterStyles";
-import {Button, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 const Footer = () => {
@@ -46,7 +45,7 @@ const Footer = () => {
                                 <FooterLink as={ Link } to="/appointment" onClick={scrollTop}>Записатися на прийом</FooterLink>
                             </Column>
                             <Column>
-                                <FooterLink as={ Link } to="/enter" onClick={scrollTop}>Для адміністраторів</FooterLink>
+                                <FooterLink as={ Link } to="/editgallery" onClick={scrollTop}>Для адміністраторів</FooterLink>
                                 <FooterLink as={ Link } to="/loginadm" onClick={scrollTop}>Ahemdabad</FooterLink>
                             </Column>
                         </Row>
