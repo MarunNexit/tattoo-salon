@@ -104,6 +104,7 @@
   background-color: rgba(0, 0, 0, 0.8) !important;
   margin-left: auto;
   margin-right: auto;
+  max-height: 40vh;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -139,7 +140,6 @@
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-
 }
 
 .formAppointment
@@ -164,7 +164,7 @@
 }
 
 .galleryopacity {
-  opacity: 50%;
+  opacity: 50% !important;
 }
 
 
@@ -189,12 +189,21 @@
   text-align: start;
   font-weight: bold;
   color: darkred;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
+.carousel-inner > .carousel-item > img {
+  height: 100vh;
+}
 
-.outline {
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: red;
+.carousel-item {
+  text-align: center;
+}
+
+.carousel-caption {
+  top: 40%;
+  bottom: auto;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
 }

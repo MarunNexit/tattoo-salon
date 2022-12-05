@@ -1,25 +1,35 @@
 import React, { useContext, useEffect } from "react";
-import {Navbar, Container, Nav, Button, NavDropdown} from "react-bootstrap";
-import { firebaseService } from "../../FirebaseService";
-import { Link } from "react-router-dom";
-import '../../App.css';
-import { UserContext } from "../context/UserContext";
+import {Navbar, Container, Nav, Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import '../../../App.css';
+import { UserContext } from "../../context/UserContext";
+import {Profile} from "../../pages/forAdmin/Profile";
+import {LOCALSTORE_USER} from "../../models/Сonstants";
 
 
 const Menu = () => {
 
     const { user, setUser } = useContext(UserContext);
-    const logOut = (e) => {
-        firebaseService.logout()
-            .then(() => {
-                setUser({
-                    email: "",
-                    password: "",
-                    auth: null,
-                    firebaseUser: null,
-                });
-            });
-    };
+
+    useEffect(() => {
+        console.log("reload user");
+        if(user.auth !== null)
+        {
+            return;
+        }
+
+        let userLocal = window.localStorage.getItem(LOCALSTORE_USER);
+        userLocal = userLocal ? JSON.parse(userLocal) : userLocal;
+        setUser(userLocal);
+    }, []);
+
+    useEffect(()=>{
+        if(user && user.auth !== null) {
+            window.localStorage.setItem(LOCALSTORE_USER, JSON.stringify(user));
+            console.log(user);
+        }
+
+    }, [user]);
 
     function changeBackgroundRed(e) {
         e.target.style.background = 'darkred';
@@ -35,7 +45,7 @@ const Menu = () => {
             <Container>
                 <Navbar.Brand as={ Link } to="/" className="navbar-brand">
                     <img
-                    src="/img/newmainlogo.png"
+                    src="/img/logo/newmainlogo.png"
                     width="175"
                     height="70"
                     className="d-inline-block align-top"
@@ -49,18 +59,11 @@ const Menu = () => {
                         <Nav.Link  as={ Link } to="/about">Про нас</Nav.Link>
                         <Nav.Link  as={ Link } to="/contact">Контакти</Nav.Link>
                         <Nav.Link></Nav.Link>
-                        { user.email.length > 6 ?
-                            <>
-                                <NavDropdown title={user.email} id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="#action/3.1">Редагування галереї</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">Щось</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={e => logOut(e)}>Вийти</NavDropdown.Item>
-                                </NavDropdown>
-                            </>
+                        { user && user.auth ?
+                            <Profile />
                             : ""
                         }
-                        <Button as={ Link } to="/appointment" variant="light" size={"lg"} onMouseOver={changeBackgroundRed} onMouseOut={changeBackgroundWhite} >Записатися на сеанс</Button>
+                        <Button as={ Link } style={{marginLeft: 20}} to="/appointment" variant="light" size={"lg"} onMouseOver={changeBackgroundRed} onMouseOut={changeBackgroundWhite} >Записатися на сеанс</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

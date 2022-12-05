@@ -8,8 +8,8 @@ const TopPages = (headText) => {
 
     return (
         <div className={"topBanner"} style={{ height: '22vh', width: '100%',
-            backgroundImage: `url(${"img/top_backgr.jpg"})`}}>
-            <h1 className={"topBannerBot"} style={{textAlign: "center",  width: '50%'}}>{headText.text}</h1>
+            backgroundImage: `url(${"img/top/top_backgr.jpg"})`}}>
+            <h1 className={"topBannerBot"} style={{textAlign: "start",  width: '70%', marginLeft: "80px"}}>{headText.text}</h1>
         </div>
     );
 };

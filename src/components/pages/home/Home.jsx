@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import S_Card from "../../card/S_Card";
 import {Row, Col} from 'react-bootstrap';
 import {Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {Container} from "../../footer/FooterStyles";
+import Carousel from 'react-bootstrap/Carousel';
 
 const itemList = [
-    {id: 1,titles: "Портфоліо", urls: "/gallery", desc: "Багата різноманітність різних тату-майстрів та їх робіт", img: "/img/tattoo0.png"},
-    {id: 2,titles: "Kurisu", urls: "/about", desc: "Kurisu - це один з успішних тату-салонів ІФ", img: "/img/tattoo1.png"},
-    {id: 3,titles: "Контакти", urls: "/contact", desc: "Щоб звенутися до працівників тату-салону Kurisu, дзвоніть на:+380974839217", img: "/img/tattoo2.png"},
+    {id: 3,titles: "Контакти", urls: "/contact", desc: "Щоб звенутися до працівників тату-салону Kurisu, дзвоніть на:+380974839217", img: "/img/home/tattoo2.png"},
+    {id: 1,titles: "Портфоліо", urls: "/gallery", desc: "Багата різноманітність різних тату-майстрів та їх робіт", img: "/img/home/tattoo0.png"},
+    {id: 2,titles: "Kurisu", urls: "/about", desc: "Kurisu - це один з успішних тату-салонів ІФ", img: "/img/home/tattoo1.png"},
 ];
 
 
@@ -17,14 +17,20 @@ const Cards = () => {
         <div>
             <section className="container">
                 <Row xs={1} md={2}  className="g-4">
-                    {itemList.map(item => {
-                        return(
-                            <Col key={item.id} >
-                                {/* eslint-disable-next-line react/jsx-pascal-case */}
-                                <S_Card card={item}  />
-                            </Col>
-                        )
-                    })}
+                    <Col  >
+                        {/* eslint-disable-next-line react/jsx-pascal-case */}
+                        <S_Card card={itemList[0]}  />
+                    </Col>
+                    <Col>
+                        <Col  className="d-flex flex-column justify-content-start">
+                            {/* eslint-disable-next-line react/jsx-pascal-case */}
+                            <S_Card card={itemList[1]}  />
+                        </Col>
+                        <Col className="d-flex flex-column justify-content-end">
+                            {/* eslint-disable-next-line react/jsx-pascal-case */}
+                            <S_Card card={itemList[2]}  />
+                        </Col>
+                    </Col>
                 </Row>
             </section>
         </div>
@@ -36,10 +42,17 @@ const Home = () => {
         window.scrollTo(0, 0)
     }, [])
 
+    const [index, setIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
+
     return (
         <div>
             <div className="banner-bg" style={{
-                backgroundImage: `url(${"img/home_backgr_1.jpg"})`,
+                backgroundImage: `url(${"img/home/home_backgr_1.jpg"})`,
                 hight: 'auto',
                 minHeight: '100%',
                 alignItems:'center'
@@ -83,12 +96,69 @@ const Home = () => {
                                 </Col>
                                 <br />
                             </Row>
-
                         </div>
                     </Row>
                     <br />
                 </div>
             </div>
+            <br />
+            <Carousel activeIndex={index} onSelect={handleSelect} fade>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="img/home/slider/tattoo_new_1.jpg?auto=yes&bg=777&fg=555&text=First slide&bg=373940"
+                        alt="First slide"
+                    />
+                    <Carousel.Caption>
+                        <div className={"w-100 d-flex flex-column justify-content-center"}>
+                            <h1>Доступні ціни</h1>
+                            <h3>У нас Ви зможете найти ідеальне співвідношення ціни та якості</h3>
+                        </div>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="img/home/slider/tattoo_new_2.jpg?auto=yes&bg=777&fg=555&text=First slide&bg=373940"
+                        alt="Second slide"
+                    />
+                    <Carousel.Caption>
+                        <div className={"w-100 d-flex flex-column justify-content-center"}>
+                            <h1>Контроль якості</h1>
+                            <h3>Проводиться опитування кожного користувача щодо якості наданих послуг</h3>
+                        </div>
+
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="img/home/slider/tattoo_new_3.jpg?auto=yes&bg=777&fg=555&text=First slide&bg=373940"
+                        alt="Third slide"
+                    />
+
+                    <Carousel.Caption>
+                        <div className={"w-100 d-flex flex-column justify-content-center"}>
+                            <h1>Допомога клієнтам</h1>
+                            <h3>Особливий підхід до кожного клієнту. Консультація та підбір ескізів безкоштовно</h3>
+                        </div>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src="img/home/slider/tattoo_new_3.jpg?auto=yes&bg=777&fg=555&text=First slide&bg=373940"
+                        alt="Third slide"
+                    />
+
+                    <Carousel.Caption>
+                        <div className={"w-100 d-flex flex-column justify-content-center"}>
+                            <h1>Гарантія Безпеки</h1>
+                            <h3>3ч-етапна стерилізація обладнання і спеціальні системи обробки студії</h3>
+                        </div>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
             <br />
             <Cards  />
         </div>

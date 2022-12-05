@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
-import {Button, Col, Row} from "react-bootstrap";
-import Message from "../message/Message";
+import {Button, CardImg, Col, Image, Row} from "react-bootstrap";
+import Message from "../shared/message/Message";
+import {useAuthorContext} from "../context/AuthorContext";
+import {firebaseService} from "../../FirebaseService";
 import {LOCALSTORE_TOTALITEMS} from "../models/Сonstants";
+import NewCalendar from "./calendar/NewCalendar";
+import Nav from "react-bootstrap/Nav";
 
+const FormMain = (props) => {
 
-
-const FormContact = (props) => {
+    const {author, setAuthor} = useAuthorContext();
 
     const [emailError, setEmailError] = useState("");
     const [mobileError, setMobileError] = useState("");
@@ -21,9 +25,76 @@ const FormContact = (props) => {
     const [message, setMessage] = useState({});
     const [shows, setShows] = useState(true);
 
+    const [authorMass, SetAuthorMass] = useState([]);
+    const [selecting, SetSelecting] = useState("");
+
     function isValidEmail(email) {
         return /\S+@\S+\.\S+/.test(email);
     }
+
+    function getAuthor() {
+        firebaseService.getTattoo("author").then((doc) => {
+            setAuthor([...doc]);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    useEffect(() => {
+        console.log("Useeffect")
+        getAuthor();
+        getLocalStore();
+        console.log(author)
+    }, [])
+
+    const getLocalStore = () => {
+        let cardsLocal = window.localStorage.getItem(LOCALSTORE_TOTALITEMS);
+        let cards = "Немає вподобаних тату";
+        if(cardsLocal === null){
+            return (cards);
+        }
+        else
+        {
+            cardsLocal = cardsLocal[2] ? JSON.parse(cardsLocal) : cardsLocal;
+            let cards = "Немає вподобаних тату";
+            console.log(cardsLocal)
+            if(cardsLocal && Array.isArray(cardsLocal) && cardsLocal.length > 0) {
+                cards = cardsLocal.map((item, index) => {
+                    console.log(cardsLocal)
+                    return(
+                        <Nav.Item key={index} className={selecting === item.id._key.path.segments[6] ? '' : 'galleryopacity'}>
+                            <Nav.Link className={'gallerylink'}>
+                                <CardImg variant="top" src={item.url} onClick={(() => ChangeExample(item))}></CardImg>{item.name}</Nav.Link>
+
+                        </Nav.Item>
+                    );
+                });
+            }
+            return (cards);
+        }
+    };
+
+    function ChangeExample(item) {
+        if(item.id._key.path.segments[6] === selecting)
+        {
+            SetSelecting("");
+            updateFormData({
+                ...formData,
+
+                ["example"]: ""
+            });
+        }
+        else
+        {
+            SetSelecting(item.id._key.path.segments[6]);
+            updateFormData({
+                ...formData,
+
+                ["example"]: item.url
+            });
+        }
+    }
+
 
     const check = (e) => {
         e.preventDefault();
@@ -35,9 +106,7 @@ const FormContact = (props) => {
         setIsSend(true);
         if(isAppointment){
             if (!isValidEmail(formData["email"])) {
-                // setIsMessage(true);
-                // setMessage({type: "danger", heading:"Помилка", text: "Невірний тип електронної пошти, використайте пошту університету"});
-                setEmailError("Введіть email університету '@nung.edu.ua'");
+                setEmailError("Введіть правильний email");
                 isError = true;
             }
             if (formData["FirstName"].length < 2) {
@@ -49,6 +118,7 @@ const FormContact = (props) => {
                 isError = true;
             }
             if (formData["mobile"].length < 10) {
+                console.log(formData["mobile"]);
                 setMobileError("Введіть номер телефону");
                 isError = true;
             }
@@ -97,6 +167,8 @@ const FormContact = (props) => {
         master: "Будь-який",
         location: "",
         color: "Ще не вирішив",
+        example: "",
+        data: "",
         message: "",
     });
 
@@ -111,14 +183,45 @@ const FormContact = (props) => {
 
     const [formDataContact, updateFormDataContact] = React.useState(initialFormDataContact);
     const [formData, updateFormData] = React.useState(initialFormData);
+    const [count, SetCount] = React.useState(0);
 
     const handleChange = (e) => {
         console.log(e.target.value.trim())
         if(e.target.name === "mobile")
         {
             e.target.value = e.target.value.replace(/\D/g, '');
+            updateFormData({
+                ...formData,
+
+                [e.target.name]: e.target.value
+            });
         }
-        if(isAppointment) {
+        else if(e.target.name === "master")
+        {
+            {authorMass.map((item) => {
+                if(item.name === e.target.value.trim())
+                {
+                    SetCount(count+1);
+                    console.log("change master");
+                    updateFormData({
+                        ...formData,
+
+                        [e.target.name]: item.id
+                    });
+                }
+                if(count === 0)
+                {
+                    console.log("0");
+                    updateFormData({
+                        ...formData,
+
+                        [e.target.name]: 0
+                    });
+                }
+            })}
+            SetCount(0);
+        }
+        else if(isAppointment) {
             updateFormData({
                 ...formData,
 
@@ -134,6 +237,7 @@ const FormContact = (props) => {
             });
         }
         console.log(e.target.name)
+        console.log(formData)
         console.log(e.target.value.trim())
     };
 
@@ -144,7 +248,7 @@ const FormContact = (props) => {
                 const templateId = 'template_tigp3ki';
                 const serviceID = "service_kurisuTattoo";
                 sendFeedback(serviceID, templateId, {
-                    FirstName: formData.FirstName, LastName: formData.LastName, email: formData.email, mobile: formData.mobile, master: formData.master,location: formData.location,color: formData.color,message: formData.message})
+                    FirstName: formData.FirstName, LastName: formData.LastName, email: formData.email, mobile: formData.mobile, master: formData.master,location: formData.location,color: formData.color,example: formData.example, data:formData.data,message: formData.message})
                 console.log(formData);
                 // alert(`Дякую за повідомлення. Запит успіщно відправлено`);
                 setIsMessage(true);
@@ -181,6 +285,15 @@ const FormContact = (props) => {
 
     const MessageChange = () => {
         setIsMessage(false)
+    }
+
+
+    const GetDay = (data) => {
+        updateFormData({
+            ...formData,
+
+            ["data"]: data
+        });
     }
 
     return (
@@ -250,10 +363,12 @@ const FormContact = (props) => {
                     <Form.Group as={Col} controlId="formGridTattooMaster" className={"text-start"}>
                         <Form.Label>Тату-мастер</Form.Label>
                         <Form.Select defaultValue="Будь-який" onChange= {handleChange} name = "master">
-                            <option>Будь-який</option>
-                            <option>Софія Богданова</option>
-                            <option>Арсен Коваль</option>
-                            <option>Денис Овчаренко</option>
+                            <option >Будь-який</option>
+                            {Array.from(author).map((item) => {
+                                return(
+                                    <option key={item.id} >{item.name}</option>
+                                )
+                            })}
                         </Form.Select>
                     </Form.Group>
 
@@ -264,7 +379,7 @@ const FormContact = (props) => {
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridTattooColor" className={"text-start"}>
-                        <Form.Label>Чорне, сіре чи кольорове тату</Form.Label>
+                        <Form.Label>Колір тату</Form.Label>
                         <Form.Select defaultValue="Вибір..." onChange= {handleChange} name = "color">
                             <option>Ще не вирішив</option>
                             <option>Чорне</option>
@@ -274,6 +389,31 @@ const FormContact = (props) => {
                     </Form.Group>
                 </Row> : null }
 
+                {isAppointment ?
+                    <Row xs={1} md={2}  className="g-5 justify-content-center">
+                        <Col>
+                            <Form.Group as={Col} controlId="formExampleTattoo" className={"text-start"}>
+                                <Form.Label>Приклад тату</Form.Label>
+                                <Row xs={1} md={2}  className="g-5 justify-content-center">
+                                    <br/><br/>
+                                    {getLocalStore()}
+                                </Row>
+                                <div className="row">
+                                </div>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group as={Col} controlId="formGridTattooColor" className={"text-start"}>
+                                <Form.Label>Календар</Form.Label>
+                                <div>
+                                    <NewCalendar GetDay={GetDay}/>
+                                </div>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                     : null }
+
+                <br />
                 <Form.Group className="mb-3, text-start" controlId="formGridMessage">
                     <Form.Label>Повідомлення</Form.Label>
                     <Form.Control as="textarea"
@@ -289,4 +429,7 @@ const FormContact = (props) => {
     );
 };
 
-export default FormContact;
+export default FormMain;
+
+
+

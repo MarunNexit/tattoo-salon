@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import GoogleMap from "../../googleMap/GoogleMap"
 import {Col, Row, Image} from "react-bootstrap";
-import TopPages from "../../topPages/TopPages";
-import FormContact from "../../form/FormContact";
+import TopPages from "../../shared/topPages/TopPages";
+import FormMain from "../../form/FormMain";
 
 const Contact = () => {
 
@@ -17,10 +17,10 @@ const Contact = () => {
             <br/>
             <br/>
             <Row>
-                <Col md={{ span: 5, offset: 1 }}>
-                    <Image src={"../../img/tattoo0.png"} style={{height: 350}}/>
+                <Col md={{ span: 5, offset: 1 }} className="col my-auto" >
+                    <Image src={"../../img/contact/contact_2.png"} style={{height: "350px", objectFit: "contain"}}/>
                 </Col>
-                <Col md={{ span: 4 }}  className="col my-auto">
+                <Col md={{ span: 4 , offset: 1 }}  className="col my-auto">
                     <div style={{fontSize: 20}} >
                         <h2>Контактні дані</h2>
                         <div>
@@ -38,20 +38,17 @@ const Contact = () => {
             <Row>
                 <Col md={{ span: 5, offset: 1 }}  className="col my-auto" >
                     <div style={{fontSize: 20}}>
-                        <h2>Адреса</h2>
+                        <h2>Графік роботи</h2>
                         <div>
-                            Україна, Івано-Франківськ, вул. Федьковича
+                            Пн-Нд
                         </div>
                         <div>
-                            Тел: +380974839217
-                        </div>
-                        <div>
-                            mazkevych2003@gmail.com
+                            11:00-20:00
                         </div>
                     </div>
                 </Col>
                 <Col md={{ span: 4}} className="col my-auto"  >
-                        <Image  src={"../../img/tattoo1.png"} style={{height: 350}}/>
+                        <Image  src={"../../img/contact/contact_1.jpg"} style={{height: 350}}/>
                 </Col>
             </Row>
             <br/><br/>
@@ -61,7 +58,7 @@ const Contact = () => {
             <br/><br/>
             <TopPages />
             <br/><br/>
-            <FormContact state={false}/>
+            <FormMain state={false}/>
         </div>
     );
 };

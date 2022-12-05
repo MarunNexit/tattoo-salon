@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button, Card} from "react-bootstrap";
+import {Button, Card, Row} from "react-bootstrap";
 import { ImageViewer } from "react-image-viewer-dv"
 import {useState} from "react";
 import {LOCALSTORE_TOTALITEMS} from "../models/Сonstants";
@@ -16,8 +16,7 @@ const Gallery_Card = (props) => {
         cardsLocal = cardsLocal ? JSON.parse(cardsLocal) : cardsLocal;
         if(cardsLocal && Array.isArray(cardsLocal) && cardsLocal.length > 0) {
                 cardsLocal.map(item => {
-                    if(item.id === props.card.id) {
-                        console.log(props.card);
+                    if(item.id._key.path.segments[6] === props.card.id._key.path.segments[6]) {
                         setButtonVariant("danger");
                         setButtonText("Не подобається");
                     }
@@ -30,34 +29,42 @@ const Gallery_Card = (props) => {
         if(buttonVariant === "success")
         {
             props.getItem(props.card);
-            console.log(props.card);
             setButtonVariant("danger");
             setButtonText("Не подобається");
         }
         else
         {
             props.removeItem(props.card);
-            console.log(props.card);
             setButtonVariant("success");
             setButtonText("Подобається");
         }
     }
 
-    const deleteItem = () =>{
-        console.log(props.card);
-        props.deleteCard(props.card);
-
+    const deleteCard = () =>{
+        props.deleteData(props.card);
     }
+
+
+    const editCard = () => {
+        props.editData(props.card);
+    }
+
+
+
 
     return (
             <div>
             <Card >
-                <ImageViewer>
-                    <Card.Img  variant="top" src={props.card.imgurl} />
-                </ImageViewer>
+                    <ImageViewer>
+                        <Card.Img  variant="top" src={props.card.url} />
+                    </ImageViewer>
+
                 <Card.Footer>
-                    {editMode?
-                        <Button variant="danger" onClick={deleteItem}>Видалити</Button>
+                    {editMode ?
+                        <Row md={2}>
+                            <Button variant="success" onClick={editCard}>Редагувати</Button>
+                            <Button variant="danger" onClick={deleteCard}>Видалити</Button>
+                        </Row>
                     :
                     <Button variant={buttonVariant} onClick={addItem}>{/*Button Text*/} {buttonText}</Button>
                     }

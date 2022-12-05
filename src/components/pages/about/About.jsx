@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
-import {LOCALSTORE_TOTALITEMS} from "../../models/Сonstants";
-import {Card, Col, Image, Row} from "react-bootstrap";
-import {ImageViewer} from "react-image-viewer-dv";
-import TopPages from "../../topPages/TopPages";
+import {Col, Image, Row} from "react-bootstrap";
+import TopPages from "../../shared/topPages/TopPages";
+import {Link} from "react-router-dom";
+import {useAuthorContext} from "../../context/AuthorContext";
 
 const About = () => {
+
+    const {author} = useAuthorContext();
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -16,8 +18,8 @@ const About = () => {
             <TopPages text={"Про нас"} />
             <br/><br/>
             <Row className="justify-content-md-centre">
-                <Col className="col my-auto" md={{ span: 5, offset: 1 }} >
-                    <Image roundedCircle={true} src={"../../img/tattoo1.png"} style={{height: 300}}/>
+                <Col className="col my-auto" md={{ span: 4, offset: 1 }} >
+                    <Image src={"../../img/about/about.png"} style={{height: 300}}/>
                 </Col>
 
                 <Col md={{ span: 5}} className="col my-auto">
@@ -37,53 +39,45 @@ const About = () => {
             <TopPages />
             <br/><br/>
             <h2 style={{fontSize: 36}}>Робочий персонал</h2>
-            <Row className="justify-content-md-centre">
-                <Col md={{ span: 5, offset: 1 }}className="col my-auto">
-                    <h3 >Софія Богданова</h3>
-                    <div style={{fontSize: 20}}> Професійний тату-майстер з Запоріжжя.
-                    </div>
-                </Col>
-                <Col className="col my-auto" md={{ span: 5 }} >
-                    <Image roundedCircle={true} src={"../../img/tattoo1.png"} style={{height: 300}}/>
-                </Col>
-            </Row>
             <br/>
-            <Row className="justify-content-md-centre">
-                <Col className="col my-auto" md={{ span: 5, offset: 1 }} >
-                    <Image roundedCircle={true} src={"../../img/tattoo1.png"} style={{height: 300}}/>
-                </Col>
-
-                <Col md={{ span: 5}} className="col my-auto">
-                    <h3>Арсен Коваль</h3>
-                    <div style={{fontSize: 20}}> Ласкаво просимо до міста Івано-Франківськ, до нашої тату-студії, яка
-                        надасть Вам послуги у сфері тату. Додайте у своє життя
-                        яскравих емоцій та контрасту, відвідавши наш заклад.
-                        Івано-Франківська тату-студія за настільки довгий час виявила себе
-                        досить сильно і сміливо, не даючи засумніватися у своїй
-                        роботі. Ви все ще думаєте зробити татуювання в Івано-Франківську? Не
-                        думайте - наважуйтеся швидше, тату салон "КУРІСУ" завжди
-                        готовий зробити Ваше життя яскравим та насиченим. Покажи свою унікальність.
+            {Array.from(author).map((item, index) => {
+                return (
+                    <div key={index}>
+                        <Row className="justify-content-md-centre">
+                            {item.addimg === "" || item.addimg === " " || item.addimg === null || item.addimg === undefined?
+                                <Row className="justify-content-md-centre" >
+                                    <Col md={{ span: 5, offset: 1 }} className="col my-auto">
+                                        <h3>{item.name}</h3>
+                                        <div style={{fontSize: 20}}> {item.descript} Щоб переглянути портфоліо, <Link as={ Link } to="/gallery">натисніть тут</Link> або перегляньте @slavamephi в Instagram
+                                        </div>
+                                    </Col>
+                                    <Col className="col my-auto" md={{ span: 5 }} >
+                                        <Image src={item.headimg} style={{height: 320}}/>
+                                    </Col>
+                                </Row>
+                                :
+                                <Row className="justify-content-md-centre">
+                                    <Col className="col my-auto" md={{ span: 5, offset: 1 }} >
+                                        <Image src={item.addimg} style={{height: "80%", width: "80%"}}/>
+                                    </Col>
+                                    <Col md={{ span: 5 }} className="row gy-1">
+                                        <Col className="col my-auto">
+                                            <h3>{item.name}</h3>
+                                            <div style={{fontSize: 20}}> {item.descript} Щоб переглянути портфоліо, <Link as={ Link } to="/gallery">натисніть тут</Link> або перегляньте @slavamephi в Instagram
+                                            </div>
+                                        </Col>
+                                        <Col  className="d-flex flex-column justify-content-end" >
+                                            <Image src={item.headimg} style={{height: 400}}/>
+                                        </Col>
+                                    </Col>
+                                </Row>
+                            }
+                        </Row>
+                        <br />    <br />
                     </div>
-                </Col>
-            </Row>
-            <br/>
-            <Row className="justify-content-md-centre">
-                <Col md={{ span: 5, offset: 1 }} className="col my-auto">
-                    <h3>Денис Овчаренко</h3>
-                    <div style={{fontSize: 20}}> Ласкаво просимо до міста Івано-Франківськ, до нашої тату-студії, яка
-                        надасть Вам послуги у сфері тату. Додайте у своє життя
-                        яскравих емоцій та контрасту, відвідавши наш заклад.
-                        Івано-Франківська тату-студія за настільки довгий час виявила себе
-                        досить сильно і сміливо, не даючи засумніватися у своїй
-                        роботі. Ви все ще думаєте зробити татуювання в Івано-Франківську? Не
-                        думайте - наважуйтеся швидше, тату салон "КУРІСУ" завжди
-                        готовий зробити Ваше життя яскравим та насиченим. Покажи свою унікальність.
-                    </div>
-                </Col>
-                <Col className="col my-auto" md={{ span: 5 }} >
-                    <Image roundedCircle={true} src={"../../img/tattoo1.png"} style={{height: 300}}/>
-                </Col>
-            </Row>
+                )
+            })
+            }
         </div>
     );
 };

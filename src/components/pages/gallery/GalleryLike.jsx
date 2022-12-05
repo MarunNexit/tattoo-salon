@@ -22,22 +22,30 @@ const GalleryLike = () => {
 
     const getLocalStore = () => {
         let cardsLocal = window.localStorage.getItem(LOCALSTORE_TOTALITEMS);
-        cardsLocal = cardsLocal[2] ? JSON.parse(cardsLocal) : cardsLocal;
         let cards = "Немає вподобаних тату";
-        if(cardsLocal && Array.isArray(cardsLocal) && cardsLocal.length > 1) {
-            cards = cardsLocal.map(item => {
-                if(item.id>0){
-                return(
-                    <div key={item.id}>
-                        <ImageViewer>
-                            <Card.Img  variant="top" src={item.imgurl} />
-                        </ImageViewer>
-                    </div>
-                );}
-            });
+        if(cardsLocal === null){
+            return (cards);
         }
-        return (cards);
+        else
+        {
+            cardsLocal = cardsLocal[2] ? JSON.parse(cardsLocal) : cardsLocal;
+            let cards = "Немає вподобаних тату";
+            if(cardsLocal && Array.isArray(cardsLocal) && cardsLocal.length > 0) {
+                cards = cardsLocal.map((item, index) => {
+                        return(
+                            <div key={index}>
+                                <ImageViewer>
+                                    <Card.Img  variant="top" src={item.url} />
+                                </ImageViewer>
+                            </div>
+                        );
+                });
+            }
+            return (cards);
+        }
+
     };
+
     return (
         <div className="container-fluid">
             <>
