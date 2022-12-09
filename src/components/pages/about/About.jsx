@@ -15,7 +15,7 @@ const About = () => {
 
     return (
         <div className="container-fluid">
-            <TopPages text={"Про нас"} />
+            <TopPages text={"Про нас"} img={"img/top/top_backgr.jpg"}/>
             <br/><br/>
             <Row className="justify-content-md-centre">
                 <Col className="col my-auto" md={{ span: 4, offset: 1 }} >
@@ -36,7 +36,7 @@ const About = () => {
                 </Col>
             </Row>
             <br/><br/>
-            <TopPages />
+            <TopPages img={"img/top/backgr_1.png"}/>
             <br/><br/>
             <h2 style={{fontSize: 36}}>Робочий персонал</h2>
             <br/>
@@ -48,7 +48,7 @@ const About = () => {
                                 <Row className="justify-content-md-centre" >
                                     <Col md={{ span: 5, offset: 1 }} className="col my-auto">
                                         <h3>{item.name}</h3>
-                                        <div style={{fontSize: 20}}> {item.descript} Щоб переглянути портфоліо, <Link as={ Link } to="/gallery">натисніть тут</Link> або перегляньте @slavamephi в Instagram
+                                        <div style={{fontSize: 20}}> {item.descript}  Щоб переглянути портфоліо, <Link as={ Link } to="/gallery">натисніть тут </Link> або перегляньте @slavamephi в Instagram
                                         </div>
                                     </Col>
                                     <Col className="col my-auto" md={{ span: 5 }} >

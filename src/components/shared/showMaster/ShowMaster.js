@@ -12,7 +12,6 @@ const ShowMaster = (props) => {
                     src="img/gallery/All.jpg"></Image></Nav.Link>
             </Nav.Item>
             {Array.from(props.author).map((item, index) => {
-                {console.log(item)}
                 return (
                     <Nav.Item key={index} className={props.authorId === item.id ? '' : 'galleryopacity'}>
                         <Nav.Link className={'gallerylink'} onClick={() => props.ChangeAuthorId(item.id)}>

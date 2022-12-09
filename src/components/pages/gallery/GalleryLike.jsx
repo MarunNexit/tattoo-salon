@@ -43,7 +43,6 @@ const GalleryLike = () => {
             }
             return (cards);
         }
-
     };
 
     return (

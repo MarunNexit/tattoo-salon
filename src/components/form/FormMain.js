@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
-import {Button, CardImg, Col, Image, Row} from "react-bootstrap";
+import {Button, CardImg, Col, Image, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 import Message from "../shared/message/Message";
 import {useAuthorContext} from "../context/AuthorContext";
 import {firebaseService} from "../../FirebaseService";
@@ -41,10 +41,8 @@ const FormMain = (props) => {
     }
 
     useEffect(() => {
-        console.log("Useeffect")
         getAuthor();
         getLocalStore();
-        console.log(author)
     }, [])
 
     const getLocalStore = () => {
@@ -296,6 +294,19 @@ const FormMain = (props) => {
         });
     }
 
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            <ul className={"justify-content-start"} style={{fontSize: 18}}>
+                <li>
+                    Чорне – 11 гривень за кв. см.
+                </li>
+                <li>
+                    Кольорове – 15 гривень за кв. см.
+                </li>
+            </ul>
+        </Tooltip>
+    );
+
     return (
         <div className="row justify-content-sm-center">
 
@@ -379,11 +390,16 @@ const FormMain = (props) => {
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridTattooColor" className={"text-start"}>
-                        <Form.Label>Колір тату</Form.Label>
+                        <OverlayTrigger
+                            placement="right"
+                            delay={{ show: 250, hide: 400 }}
+                            overlay={renderTooltip}
+                        >
+                        <Form.Label>Колір тату (і)</Form.Label>
+                        </OverlayTrigger>
                         <Form.Select defaultValue="Вибір..." onChange= {handleChange} name = "color">
                             <option>Ще не вирішив</option>
                             <option>Чорне</option>
-                            <option>Сіре</option>
                             <option>Кольорове</option>
                         </Form.Select>
                     </Form.Group>

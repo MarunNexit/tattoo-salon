@@ -1,19 +1,18 @@
-import './App.css';
-import Menu from "./components/shared/menu/Menu";
-import Home from "./components/pages/home/Home";
-import Gallery from "./components/pages/gallery/Gallery";
-import About from "./components/pages/about/About";
-import Contact from "./components/pages/contact/Contact";
-import Appointment from "./components/pages/appointment/Appointments";
+import '../App.css';
+import Menu from "./shared/menu/Menu";
+import Home from "./pages/home/Home";
+import Gallery from "./pages/gallery/Gallery";
+import About from "./pages/about/About";
+import Contact from "./pages/contact/Contact";
+import Appointment from "./pages/appointment/Appointments";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import EditGallery from "./components/pages/forAdmin/EditGallery";
-import Footer from "./components/shared/footer/Footer";
-import LoginAdmin from "./components/pages/forAdmin/loginAdmin/LoginAdmin";
-import React, {useEffect, useState} from "react";
-import {UserContext} from "./components/context/UserContext";
+import EditGallery from "./pages/forAdmin/EditGallery";
+import Footer from "./shared/footer/Footer";
+import LoginAdmin from "./form/loginAdmin/LoginAdmin";
+import React, {useState} from "react";
+import {UserContext} from "./context/UserContext";
 import "firebase/compat/firestore";
-import {firebaseService} from "./FirebaseService";
-import {AuthorContext, AuthorContextProvider, useAuthorContext} from "./components/context/AuthorContext";
+import {AuthorContextProvider, useAuthorContext} from "./context/AuthorContext";
 
 function App() {
 

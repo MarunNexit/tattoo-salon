@@ -13,7 +13,7 @@ const Contact = () => {
 
     return (
         <div className="container-fluid">
-            <TopPages text={"Контакти"} />
+            <TopPages text={"Контакти"} img={"img/top/top_backgr.jpg"}/>
             <br/>
             <br/>
             <Row>
@@ -52,11 +52,11 @@ const Contact = () => {
                 </Col>
             </Row>
             <br/><br/>
-            <TopPages />
+            <TopPages img={"img/top/backgr_1.png"}/>
             <br/><br/>
             <GoogleMap />
             <br/><br/>
-            <TopPages />
+            <TopPages img={"img/top/backgr_2.png"}/>
             <br/><br/>
             <FormMain state={false}/>
         </div>

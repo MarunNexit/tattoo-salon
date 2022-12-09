@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Form } from "react-bootstrap";
-import { firebaseService } from "../../../../FirebaseService";
-import {UserContext} from "../../../context/UserContext";
+import { firebaseService } from "../../../FirebaseService";
+import {UserContext} from "../../context/UserContext";
 import {useNavigate} from "react-router-dom";
+import TopPages from "../../shared/topPages/TopPages";
 
 const LoginAdmin = () => {
     const { user, setUser } = useContext(UserContext);
@@ -57,7 +58,7 @@ const LoginAdmin = () => {
 
     return (
         <div className="main-min-height row align-items-center justify-content-center">
-
+            <TopPages text={"Авторизація"} img={"img/top/top_backgr.jpg"}/>
             <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
                 <div className="row">
                     <div className="col-12">

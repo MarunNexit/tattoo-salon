@@ -12,12 +12,10 @@ const Menu = () => {
     const { user, setUser } = useContext(UserContext);
 
     useEffect(() => {
-        console.log("reload user");
         if(user.auth !== null)
         {
             return;
         }
-
         let userLocal = window.localStorage.getItem(LOCALSTORE_USER);
         userLocal = userLocal ? JSON.parse(userLocal) : userLocal;
         setUser(userLocal);
@@ -26,7 +24,6 @@ const Menu = () => {
     useEffect(()=>{
         if(user && user.auth !== null) {
             window.localStorage.setItem(LOCALSTORE_USER, JSON.stringify(user));
-            console.log(user);
         }
 
     }, [user]);
@@ -63,7 +60,8 @@ const Menu = () => {
                             <Profile />
                             : ""
                         }
-                        <Button as={ Link } style={{marginLeft: 20}} to="/appointment" variant="light" size={"lg"} onMouseOver={changeBackgroundRed} onMouseOut={changeBackgroundWhite} >Записатися на сеанс</Button>
+                        <Button as={ Link } style={{marginLeft: 20}} to="/appointment" variant="light" size={"lg"}
+                                onMouseOver={changeBackgroundRed} onMouseOut={changeBackgroundWhite} >Записатися на сеанс</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

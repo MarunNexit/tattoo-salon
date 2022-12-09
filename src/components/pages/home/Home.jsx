@@ -4,6 +4,7 @@ import {Row, Col} from 'react-bootstrap';
 import {Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
+import TopPages from "../../shared/topPages/TopPages";
 
 const itemList = [
     {id: 3,titles: "Контакти", urls: "/contact", desc: "Щоб звенутися до працівників тату-салону Kurisu, дзвоніть на:+380974839217", img: "/img/home/tattoo2.png"},
@@ -101,7 +102,7 @@ const Home = () => {
                     <br />
                 </div>
             </div>
-            <br />
+            <br /> <br /> <br /> <br />
             <Carousel activeIndex={index} onSelect={handleSelect} fade>
                 <Carousel.Item>
                     <img
@@ -113,6 +114,16 @@ const Home = () => {
                         <div className={"w-100 d-flex flex-column justify-content-center"}>
                             <h1>Доступні ціни</h1>
                             <h3>У нас Ви зможете найти ідеальне співвідношення ціни та якості</h3>
+                            <div>
+                                <ul className={"justify-content-center"}>
+                                    <li>
+                                        <h4>Ціна чорного татуювання – 11 гривень за квадратний сантиметр</h4>
+                                    </li>
+                                    <li>
+                                        <h4>Ціна кольорового – 15 гривень</h4>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -159,7 +170,9 @@ const Home = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <br />
+            <br /> <br /> <br /> <br />
+            <TopPages img={"img/top/top_backgr.jpg"}/>
+            <br /> <br /> <br /> <br />
             <Cards  />
         </div>
     );

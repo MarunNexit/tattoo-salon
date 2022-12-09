@@ -88,7 +88,7 @@ const Gallery = () => {
 
     return (
         <div className="container-fluid">
-            <TopPages text={"Галерея"} />
+            <TopPages text={"Галерея"} img={"img/top/top_backgr.jpg"}/>
             <br />
             <Nav className="justify-content-center" defaultActiveKey="/gallery" as="ul">
                 <Nav.Item as="li">

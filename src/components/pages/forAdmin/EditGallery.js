@@ -185,7 +185,7 @@ const EditGallery = () => {
             {user && user.auth ?
                 <div>
                     <div>
-                        <TopPages text={"Редагування галереї"}/>
+                        <TopPages text={"Редагування галереї"} img={"img/top/top_backgr.jpg"}/>
                         <br/>
                         {Array.from(data).map((item, idx) => {
                             return (
