@@ -130,7 +130,6 @@ const Gallery = () => {
                 })}
             </Row>
         </div>
-
         </div>
     );
 };

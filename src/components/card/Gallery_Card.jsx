@@ -50,8 +50,6 @@ const Gallery_Card = (props) => {
     }
 
 
-
-
     return (
             <div>
             <Card >

@@ -31,6 +31,7 @@ class FirebaseService {
         return querySnapshot.docs.map(doc => doc.id);
     }
 
+
     async getTattoo(path) {
         const coursesCol = collection(this.db, path);
         const coursesSnapshot = await getDocs(coursesCol);
@@ -43,12 +44,12 @@ class FirebaseService {
         setDoc(tattooRef, { id: tattooRef }, { merge: true });
     }
 
+
     async editCard(path, authorId, url) {
         console.log("edit");
         console.log(authorId);
         console.log(url);
 
-        //console.log("/tattoo/"+path);
         const washingtonRef = doc(this.db, "/tattoo/"+path);
         console.log(washingtonRef);
         await updateDoc(washingtonRef, {authorId: authorId, url: url});
@@ -59,7 +60,6 @@ class FirebaseService {
         console.log(q);
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
         });
         return querySnapshot.docs.map(doc => doc.data());

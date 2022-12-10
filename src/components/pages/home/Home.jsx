@@ -158,7 +158,7 @@ const Home = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="img/home/slider/tattoo_new_3.jpg?auto=yes&bg=777&fg=555&text=First slide&bg=373940"
+                        src="img/home/slider/tattoo_new_4.jpg?auto=yes&bg=777&fg=555&text=First slide&bg=373940"
                         alt="Third slide"
                     />
 

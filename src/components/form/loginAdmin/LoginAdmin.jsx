@@ -14,10 +14,6 @@ const LoginAdmin = () => {
     const [emailSuccess, setEmailSuccess] = useState("");
     const [passError, setPassError] = useState("");
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
-
 
     const login = (e) => {
         e.preventDefault();
@@ -58,11 +54,11 @@ const LoginAdmin = () => {
 
     return (
         <div className="main-min-height row align-items-center justify-content-center">
-            <TopPages text={"Авторизація"} img={"img/top/top_backgr.jpg"}/>
             <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
                 <div className="row">
                     <div className="col-12">
-                        <h3>{"Логін"}</h3>
+                        <br />
+                        <h3>{"Увійти"}</h3>
                     </div>
                 </div>
                 <Form className="row" noValidate>

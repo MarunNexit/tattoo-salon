@@ -8,15 +8,14 @@ import Appointment from "./pages/appointment/Appointments";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import EditGallery from "./pages/forAdmin/EditGallery";
 import Footer from "./shared/footer/Footer";
-import LoginAdmin from "./form/loginAdmin/LoginAdmin";
 import React, {useState} from "react";
 import {UserContext} from "./context/UserContext";
 import "firebase/compat/firestore";
-import {AuthorContextProvider, useAuthorContext} from "./context/AuthorContext";
+import {AuthorContextProvider} from "./context/AuthorContext";
+import Auth from "./pages/auth/Auth";
 
 function App() {
 
-    const { getAuthor, author, setAuthor } = useAuthorContext();
 
     const [user, setUser] = useState({
         email: "",
@@ -32,7 +31,7 @@ function App() {
         { path: "/about", element: <About/> },
         { path: "/contact", element: <Contact/> },
         { path: "/appointment", element: <Appointment/> },
-        { path: "/loginadm", element: <LoginAdmin/> },
+        { path: "/loginadm", element: <Auth/> },
         { path: "/editgallery", element: <EditGallery/> }
     ];
 

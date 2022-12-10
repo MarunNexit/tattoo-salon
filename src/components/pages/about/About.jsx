@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Col, Image, Row} from "react-bootstrap";
+import {Col, Container, Image, Row} from "react-bootstrap";
 import TopPages from "../../shared/topPages/TopPages";
 import {Link} from "react-router-dom";
 import {useAuthorContext} from "../../context/AuthorContext";
@@ -42,7 +42,7 @@ const About = () => {
             <br/>
             {Array.from(author).map((item, index) => {
                 return (
-                    <div key={index}>
+                    <Container key={index}>
                         <Row className="justify-content-md-centre">
                             {item.addimg === "" || item.addimg === " " || item.addimg === null || item.addimg === undefined?
                                 <Row className="justify-content-md-centre" >
@@ -74,7 +74,7 @@ const About = () => {
                             }
                         </Row>
                         <br />    <br />
-                    </div>
+                    </Container>
                 )
             })
             }

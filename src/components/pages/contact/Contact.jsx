@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import GoogleMap from "../../googleMap/GoogleMap"
-import {Col, Row, Image} from "react-bootstrap";
+import {Col, Row, Image, Container} from "react-bootstrap";
 import TopPages from "../../shared/topPages/TopPages";
 import FormMain from "../../form/FormMain";
 
@@ -16,6 +16,7 @@ const Contact = () => {
             <TopPages text={"Контакти"} img={"img/top/top_backgr.jpg"}/>
             <br/>
             <br/>
+            <Container >
             <Row>
                 <Col md={{ span: 5, offset: 1 }} className="col my-auto" >
                     <Image src={"../../img/contact/contact_2.png"} style={{height: "350px", objectFit: "contain"}}/>
@@ -35,6 +36,7 @@ const Contact = () => {
                     </div>
                 </Col>
             </Row>
+                <br/>
             <Row>
                 <Col md={{ span: 5, offset: 1 }}  className="col my-auto" >
                     <div style={{fontSize: 20}}>
@@ -51,6 +53,7 @@ const Contact = () => {
                         <Image  src={"../../img/contact/contact_1.jpg"} style={{height: 350}}/>
                 </Col>
             </Row>
+            </Container>
             <br/><br/>
             <TopPages img={"img/top/backgr_1.png"}/>
             <br/><br/>

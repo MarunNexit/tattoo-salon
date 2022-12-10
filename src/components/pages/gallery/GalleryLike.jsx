@@ -58,7 +58,7 @@ const GalleryLike = () => {
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <div className="row">
-                            <h2 style={{textAlign: "center"}}>Список вподобаних тату</h2>
+                            <h2 style={{textAlign: "center"}}>Вподобані тату</h2>
                             <Row xs={1} md={1}  className="g-5 m-5 col-9 roomfac">
                                 {getLocalStore()}
                             </Row>

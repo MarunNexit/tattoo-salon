@@ -14,6 +14,7 @@ import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {UserContext} from "../../context/UserContext";
 import {useAuthorContext} from "../../context/AuthorContext";
 import ShowMaster from "../../shared/showMaster/ShowMaster";
+import Message from "../../shared/message/Message";
 
 
 
@@ -68,7 +69,11 @@ const EditGallery = () => {
 
     const addCard = (file, formData) => {
         if (!file) {
-            alert("Виберіть правильний файл")
+            if(file === "" || file === undefined || !file || file === " "){
+                setMessage({type: "danger", heading:"Помилка", text: "Не вибрано файл", shows: true});
+                setIsMessage(true);
+                return
+            }
         }
 
         const storageRef = ref(firebaseService.storage, `/files/${file.name}`)
@@ -141,8 +146,22 @@ const EditGallery = () => {
         setEditing(false);
     }
 
+    const [isMessage, setIsMessage] = useState(false);
+    const [message, setMessage] = useState({});
+
+    const MessageChange = () => {
+        setIsMessage(false)
+    }
+
     function editCardData(file, card)
     {
+        if (!file) {
+            if(file === "" || file === undefined || !file || file === " "){
+                setMessage({type: "danger", heading:"Помилка", text: "Не вибрано файл", shows: true});
+                setIsMessage(true);
+                return
+            }
+        }
         const refs = firebaseService.getTattooURL("tattoo", "id", formNewData.id).then((refs) => {
             const storageRef = ref(firebaseService.storage, `/files/${file.name}`)
             const uploadTask = uploadBytesResumable(storageRef, file);
@@ -179,7 +198,6 @@ const EditGallery = () => {
     }
 
 
-
     return (
         <div className="container-fluid">
             {user && user.auth ?
@@ -212,6 +230,12 @@ const EditGallery = () => {
                         </Nav>
                         {selectThisAuthor === true ?
                             <ShowMaster author={author} authorId={authorId} ChangeAuthorId={ChangeAuthorId} /> : null
+                        }
+                        {isMessage ?
+                            <div className="col-12 align-self-start">
+                                <Message type={message.type} heading={message.heading} text={message.text} shows={message.shows} setIsMessage={MessageChange}/>
+                            </div>
+                            : ""
                         }
                         <div className="container">
                             <Row xs={1} md={3} className="g-5 m-5">

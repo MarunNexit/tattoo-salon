@@ -23,7 +23,6 @@ const FormMain = (props) => {
 
     const [isMessage, setIsMessage] = useState(false);
     const [message, setMessage] = useState({});
-    const [shows, setShows] = useState(true);
 
     const [authorMass, SetAuthorMass] = useState([]);
     const [selecting, SetSelecting] = useState("");
@@ -153,7 +152,6 @@ const FormMain = (props) => {
                 return true;
             }
         }
-
     }
 
 
@@ -248,9 +246,7 @@ const FormMain = (props) => {
                 sendFeedback(serviceID, templateId, {
                     FirstName: formData.FirstName, LastName: formData.LastName, email: formData.email, mobile: formData.mobile, master: formData.master,location: formData.location,color: formData.color,example: formData.example, data:formData.data,message: formData.message})
                 console.log(formData);
-                // alert(`Дякую за повідомлення. Запит успіщно відправлено`);
                 setIsMessage(true);
-                //({type: "danger", heading:"Помилка", text: "Невірний тип електронної пошти, використайте пошту університету"});
                 setMessage({type: "success", heading:"Успіх", text: "Дякуємо за запис на сеанс", shows: true});
             }
             else{
@@ -259,9 +255,7 @@ const FormMain = (props) => {
                 sendFeedback(serviceID, templateId, {
                     FirstName: formDataContact.FirstName, LastName: formDataContact.LastName, email: formDataContact.email, mobile: formDataContact.mobile,message: formDataContact.message})
                 console.log(formDataContact);
-                // alert(`Дякую за повідомлення. Запит успіщно відправлено`);
                 setIsMessage(true);
-                //({type: "danger", heading:"Помилка", text: "Невірний тип електронної пошти, використайте пошту університету"});
                 setMessage({type: "success", heading:"Успіх", text: "Запитання надіслано", shows: true});
             }
         }
