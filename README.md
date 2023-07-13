@@ -1,5 +1,6 @@
 # Hosting
 kurisutattoo-salon.firebaseapp.com
+
 kurisutattoo-salon.web.app
 
 # Getting Started with Create React App
