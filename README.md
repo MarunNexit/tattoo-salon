@@ -1,5 +1,6 @@
 # Hosting
-kurisutattoo-salon.firebaseapp.com
+[Firebase Hosting](https://kurisutattoo-salon.web.app/).
+
 
 kurisutattoo-salon.web.app
 
