@@ -1,7 +1,7 @@
 # Hosting
-[Firebase Hosting](https://kurisutattoo-salon.web.app/).
+Firebase Hosting: https://kurisutattoo-salon.web.app/
 
-kurisutattoo-salon.web.app
+kurisutattoo-salon.web.app/
 
 # Tattoo-salon
 Tattoo parlour workflow optimization website built for educational purposes using ReactJs and Firebase database and hosting.
