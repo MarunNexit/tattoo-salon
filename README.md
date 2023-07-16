@@ -4,6 +4,13 @@
 
 kurisutattoo-salon.web.app
 
+# Hosting
+The website was created for educational purposes using ReactJs and Firebase database and hosting.
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
