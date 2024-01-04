@@ -1,6 +1,6 @@
 # Project Description
 Tattoo parlour workflow optimization website built for educational purposes using ReactJs and Firebase database and hosting.
-Developed a cutting-edge website for a publishing house using the Next.js framework. Leveraged AWS Amplify for hosting, ensuring high availability and seamless scalability. Implemented secure user authentication with AWS Cognito, while AWS Lambda (REST API) handle backend functionality. Stored data efficiently using AWS RDS and MySQL.
+"Kurisu Tattoo" website is a cutting-edge web platform designed to streamline the processes of a tattoo salon. Leveraging advanced technologies such as React.js, Node.js, Firebase NoSQL database, Bootstrap, and Git, this project revolutionizes the way the salon operates. As a full-stack developer, my role encompassed the end-to-end development of the website, ensuring seamless functionality and an intuitive user experience for both salon staff and clients.
 # Hosting
 Firebase Hosting: https://kurisutattoo-salon.web.app/
 
